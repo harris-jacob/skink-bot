@@ -28,7 +28,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/hooks", (req, res) => {
-  console.log(req.body);
+  console.log(req.params);
 });
 
 app.get("/auth", (req, res) => {
