@@ -1,4 +1,3 @@
-// import { client as WebSocketClient } from "websocket";
 import { config } from "dotenv";
 import express from "express";
 import { BotClient } from "./client";
@@ -28,7 +27,10 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/hooks", (req, res) => {
-  console.log(req.query);
+  console.log(req.body);
+  console.log(req.body.ref);
+
+  res.sendStatus(200);
 });
 
 app.get("/auth", (req, res) => {
