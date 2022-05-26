@@ -2,7 +2,6 @@ import { client as WebSocketClient, connection as Connection } from "websocket";
 import { assertDefined } from "./utils";
 
 interface Config {
-  token: string;
   /** channel the bot will use to communicate */
   channel: string;
   /** name of the bot - must match account used to generate access token */
@@ -37,7 +36,7 @@ export class BotClient {
 
   /** authenticate with server & join channel */
   login(token: string): void {
-    assertDefined(this.connection);
+    assertDefined(this.connection, "connection not initialised");
     this.connection.sendUTF(`PASS oauth:${token}`);
     this.connection.sendUTF(`NICK ${this.name}`);
     this.connection.sendUTF(`JOIN ${this.channel}`);
@@ -51,7 +50,7 @@ export class BotClient {
 
   /** Helper function for capturing all messages send by the server */
   captureLogs(): void {
-    assertDefined(this.connection);
+    assertDefined(this.connection, "connection not initialised");
 
     this.connection.on("message", (message) => {
       const text =
